@@ -20,4 +20,27 @@ public class ProductService {
     public List<Product> findAll() {
         return products;
     }
+
+    public Product addProduct (Product product){
+        products.add(product);
+        return  product;
+    }
+
+    // 3. Cập nhật
+    public Product updateProduct(int id, Product newInfo) {
+        for (Product p : products) {
+            if (p.getId() == id) {
+                p.setName(newInfo.getName());
+                p.setPrice(newInfo.getPrice());
+                return p;
+            }
+        }
+        return null;
+    }
+
+    // 4. Xóa
+    public boolean deleteProduct(int id) {
+        // removeIf trả về true nếu xóa được phần tử
+        return products.removeIf(p -> p.getId() == id);
+    }
 }

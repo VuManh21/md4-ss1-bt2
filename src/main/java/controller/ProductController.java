@@ -18,4 +18,26 @@ public class ProductController {
     public List<Product> getAllProducts() {
         return productService.findAll();
     }
+    // POST: Thêm mới
+    @PostMapping
+    public Product createProduct(@RequestBody Product product) {
+        return productService.addProduct(product);
+    }
+    // PUT: Cập nhật theo ID
+    @PutMapping("/{id}")
+    public Product updateProduct(@PathVariable int id, @RequestBody Product product) {
+        return productService.updateProduct(id, product);
+    }
+
+    // DELETE: Xóa theo ID
+    @DeleteMapping("/{id}")
+    public String deleteProduct(@PathVariable int id) {
+        boolean isDeleted = productService.deleteProduct(id);
+        if (isDeleted) {
+            return "Xóa thành công sản phẩm ID: " + id;
+        } else {
+            return "Không tìm thấy sản phẩm để xóa";
+        }
+    }
+
 }
